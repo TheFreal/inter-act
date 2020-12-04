@@ -2,10 +2,10 @@ var socket = io();
 
 socket.on('viewcount', (data) => {
     console.log("there are now " + data + " connected viewers");
-    $("#viewcount").text(data)
+    $("#viewcount").text(data + " Zuschauer");
 });
 
-$(function () {
+$(() => {
     $("#react_laugh").click(() => {
         socket.emit("react", "laugh");
     })
@@ -16,5 +16,9 @@ $(function () {
 
     $("#react_eggplant").on("click", () => {
         socket.emit("react", "eggplant");
+    })
+
+    $("#react_angry").on("click", () => {
+        socket.emit("react", "angry");
     })
 });

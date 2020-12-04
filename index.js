@@ -19,6 +19,7 @@ io.on('connection', function (client) {
 
   client.on("react", (reaction) => {
     console.log(reaction);
+    io.emit("react", reaction)
   })
 
 });
