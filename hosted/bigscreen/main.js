@@ -84,7 +84,7 @@ $(() => {
             opacity: 0.6, // default opacity 1 if opacity.animation or opacity.random it is max opacity
             random: false,// random between opacity.opacity and opacity.min
             min: 0, // minimum opacity default 
-            animation: true,
+            animation: false,
             decay: true  // if true opacity decreases until min opacity
         },
     }
