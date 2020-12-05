@@ -22,11 +22,27 @@ body{
 
 #viewcount{
     position: absolute;
-    margin-left: 2%;
+    margin-left: 3%;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: larger;
+}
+
+#proposal_container{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+}
+
+#proposal_text{
+	color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 100pt;
 }
 
 @-webkit-keyframes spaceboots {

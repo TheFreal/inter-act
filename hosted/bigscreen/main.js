@@ -4,13 +4,14 @@ let canvasWidth;
 let canvasHeight;
 let particleConfig;
 
+socket.on('connect', () => {
+    socket.emit("identify", { "device": "bigscreen" });
+})
+
 socket.on('viewcount', (data) => {
-    console.log("there are now " + data + " connected viewers");
     $("#viewcount").text(data + " Zuschauer");
 });
 
-
-//note, this is not a todo but just initial random data
 let previousReacts = new Array(20).fill(0)
 
 socket.on('react', (data) => {
@@ -50,6 +51,17 @@ socket.on('react', (data) => {
     }
 });
 
+socket.on("receive_proposal", (data) => {
+    $("#proposal_text").fadeOut(0, () => {
+        $("#proposal_text").text(data);
+        $("#proposal_text").fadeIn();
+        setTimeout(() => {
+            $("#proposal_text").fadeOut();
+        }, 3000);
+
+    });
+});
+
 $(() => {
     canvasWidth = $("#background").width();
     canvasHeight = $("#background").height();
@@ -78,7 +90,7 @@ $(() => {
         },
         layout: "after",
         color: { color: { r: 255, g: 255, b: 255 }, random: false },
-        bound: "back",
+        bound: "hide",
         position: { x: (canvasWidth / 2), y: (canvasWidth * 1.5) },
         opacity: {
             opacity: 0.6, // default opacity 1 if opacity.animation or opacity.random it is max opacity

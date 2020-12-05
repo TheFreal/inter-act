@@ -1,8 +1,17 @@
 var socket = io();
 
 socket.on('viewcount', (data) => {
-    console.log("there are now " + data + " connected viewers");
     $("#viewcount").text(data + " Zuschauer");
+});
+
+socket.on('askfor_proposals', (data) => {
+    if (data?.close != false) {
+        $("#proposal").hide();
+        return;
+    }
+    console.log("Asking for proposals!");
+    $("#proposal").show();
+    $("#proposal_question").text(data.prompt);
 });
 
 $(() => {
@@ -20,5 +29,10 @@ $(() => {
 
     $("#react_angry").on("click", () => {
         socket.emit("react", "angry");
+    })
+
+    $("#proposal_submit").on("click", () => {
+        socket.emit("receive_proposal", $("#proposal_text").val());
+        $("#proposal_text").val("");
     })
 });
