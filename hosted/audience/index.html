@@ -6,6 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>InterAct</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,20 +15,25 @@
 </head>
 
 <body>
-    <h4 id="viewcount"></h4>
-    <div id="proposal">
-        <p id="proposal_question">Sample Text</p>
-        <input type="text" id="proposal_text">
-        <button type="button" id="proposal_submit">Reinrufen</button>
-    </div>
-    <div id="vote">
+    <div id="main">
+        <p id="viewcount">
+        <p>
+        <div id="proposal">
+            <p id="proposal_question">Sample Text</p>
+            <input type="text" id="proposal_text">
+            <button type="button" id="proposal_submit">Reinrufen</button>
+        </div>
+        <div id="vote">
 
-    </div>
-    <div id="reactions">
-        <button type="button" id="react_laugh">Lachen</button>
-        <button type="button" id="react_clap">Klatschen</button>
-        <button type="button" id="react_eggplant">Aubergine</button>
-        <button type="button" id="react_angry">Wütend</button>
+        </div>
+        <div id="reactions">
+            <img src="/res/img/laugh.png" id="react_laugh" class="react">
+            <img src="/res/img/applause.png" id="react_clap" class="react">
+            <img src="/res/img/wow.png" id="react_wow" class="react">
+            <img src="/res/img/eggplant.png" id="react_eggplant" class="react">
+            <img src="/res/img/think.png" id="react_think" class="react">
+            <img src="/res/img/heart.png" id="react_heart" class="react">
+        </div>
     </div>
 </body>
 

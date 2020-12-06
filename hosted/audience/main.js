@@ -6,15 +6,17 @@ socket.on('viewcount', (data) => {
 
 socket.on('askfor_proposals', (data) => {
     if (data?.close != false) {
-        $("#proposal").hide();
+        $("#proposal").slideUp();
         return;
     }
     console.log("Asking for proposals!");
-    $("#proposal").show();
+    $("#proposal").slideDown();
     $("#proposal_question").text(data.prompt);
 });
 
 $(() => {
+    $("#proposal").hide();
+
     $("#react_laugh").click(() => {
         socket.emit("react", "laugh");
     })
@@ -27,8 +29,16 @@ $(() => {
         socket.emit("react", "eggplant");
     })
 
-    $("#react_angry").on("click", () => {
-        socket.emit("react", "angry");
+    $("#react_wow").on("click", () => {
+        socket.emit("react", "wow");
+    })
+
+    $("#react_heart").on("click", () => {
+        socket.emit("react", "heart");
+    })
+
+    $("#react_think").on("click", () => {
+        socket.emit("react", "think");
     })
 
     $("#proposal_submit").on("click", () => {

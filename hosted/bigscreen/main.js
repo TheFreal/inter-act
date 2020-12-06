@@ -23,16 +23,11 @@ socket.on('react', (data) => {
     if (previousReacts.every(v => v === data)) {
         console.log("that'S a lot of " + data + "!");
         previousReacts.fill(0);
-        $("#background").addClass("shake");
-        setTimeout(() => { $("#background").removeClass("shake") }, 5000);
+        setTimeout(() => { $("#background").addClass("shake") }, 1000);
+        setTimeout(() => { $("#background").removeClass("shake") }, 11000);
     }
 
     switch (data) {
-        case "angry":
-            for (let i = 0; i < 5; i++) {
-                $("#background").particles("add", { amount: 100, image: "/res/img/angry.png" });
-            }
-            break;
         case "laugh":
             for (let i = 0; i < 5; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/laugh.png" });
@@ -46,6 +41,21 @@ socket.on('react', (data) => {
         case "clap":
             for (let i = 0; i < 5; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/applause.png" });
+            }
+            break;
+        case "wow":
+            for (let i = 0; i < 5; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/wow.png" });
+            }
+            break;
+        case "think":
+            for (let i = 0; i < 5; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/think.png" });
+            }
+            break;
+        case "heart":
+            for (let i = 0; i < 5; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/heart.png" });
             }
             break;
     }
@@ -69,12 +79,12 @@ $(() => {
         end: "remove",
         amount: 0,
         duration: {
-            duration: 7000,// 1000 == 1s default 10s
-            random: true,// random between duration.duration and duration.min
-            min: 4000,// minimum duration default 1s
+            duration: 10000,// 1000 == 1s default 10s
+            random: false,// random between duration.duration and duration.min
+            min: 5000,// minimum duration default 1s
         },
-        speed: { speed: 2 },
-        radius: { radius: 30, random: true, min: 10 },
+        speed: { speed: 1.6 },
+        radius: { radius: 40, random: true, min: 10 },
         dir: {
             x: 1,
             y: -1,
@@ -85,15 +95,15 @@ $(() => {
                 return px += dx * s
             },
             yfunction: function (dx, px, dy, py, s, w, h, step) {
-                return py += (dy * s) / 0.5
+                return py += (dy * s)
             }
         },
         layout: "after",
         color: { color: { r: 255, g: 255, b: 255 }, random: false },
         bound: "hide",
-        position: { x: (canvasWidth / 2), y: (canvasWidth * 1.5) },
+        position: { x: (canvasWidth / 2), y: canvasHeight / 10 },
         opacity: {
-            opacity: 0.6, // default opacity 1 if opacity.animation or opacity.random it is max opacity
+            opacity: 0.7, // default opacity 1 if opacity.animation or opacity.random it is max opacity
             random: false,// random between opacity.opacity and opacity.min
             min: 0, // minimum opacity default 
             animation: true,
