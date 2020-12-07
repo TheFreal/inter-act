@@ -7,6 +7,7 @@
     <title>InterAct Moderator</title>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='main.js'></script>
 </head>
@@ -17,6 +18,50 @@
         <input type="text" id="proposal_text">
         <button type="button" id="proposal_open">Starten</button>
         <button type="button" id="proposal_close">Runde schließen</button>
+    </div>
+
+    <div id="stats">
+        <table id="stats_table">
+            <tr>
+                <th>Zuschauer</th>
+                <td id="view_current">?</th>
+            </tr>
+            <tr>
+                <th>Zuschauer (peak)</th>
+                <td id="view_peak">0</th>
+            </tr>
+            <tr>
+                <th>Lachen</td>
+                <td id="laugh_count">0</td>
+            </tr>
+            <tr>
+                <th>Klatschen</td>
+                <td id="clap_count">0</td>
+            </tr>
+            <tr>
+                <th>Wow</td>
+                <td id="wow_count">0</td>
+            </tr>
+            <tr>
+                <th>Zwinker</td>
+                <td id="eggplant_count">0</td>
+            </tr>
+            <tr>
+                <th>Denken</td>
+                <td id="think_count">0</td>
+            </tr>
+            <tr>
+                <th>Herz</td>
+                <td id="heart_count">0</td>
+            </tr>
+        </table>
+        <div id="stats_chart_container">
+            <canvas id="stats_chart"></canvas>
+        </div>
+        <div id="stats_history_container">
+            <canvas id="stats_history"></canvas>
+        </div>
+        <button type="button" id="reset_stats">Statistik zurücksetzen</button>
     </div>
 </body>
 

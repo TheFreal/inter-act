@@ -34,7 +34,12 @@ io.on('connection', function (client) {
 
   client.on("react", (reaction) => {
     console.log(reaction);
-    io.to(bigscreenId).emit("react", reaction)
+    if (bigscreenId != null) {
+      io.to(bigscreenId).emit("react", reaction)
+    }
+    if (moderatorId != null) {
+      io.to(moderatorId).emit("react", reaction)
+    }
   });
 
   client.on("askfor_proposals", (data) => {

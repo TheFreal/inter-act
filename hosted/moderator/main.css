@@ -1,0 +1,20 @@
+#stats{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 50%;
+    align-items: stretch;
+}
+#stats_chart{
+    height: 100%;
+}
+#stats_history{
+    height: 100%;
+}
+th{
+    text-align: start;
+}
+td{
+    width: 20px;
+    text-align: end;
+}
