@@ -3,6 +3,7 @@ var socket = io();
 let canvasWidth;
 let canvasHeight;
 let particleConfig;
+const emojiPerReact = 1;
 
 socket.on('connect', () => {
     socket.emit("identify", { "device": "bigscreen" });
@@ -29,32 +30,32 @@ socket.on('react', (data) => {
 
     switch (data) {
         case "laugh":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/laugh.png" });
             }
             break;
         case "eggplant":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/eggplant.png" });
             }
             break;
         case "clap":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/applause.png" });
             }
             break;
         case "wow":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/wow.png" });
             }
             break;
         case "think":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/think.png" });
             }
             break;
         case "heart":
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/heart.png" });
             }
             break;
