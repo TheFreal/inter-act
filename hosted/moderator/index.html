@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InterAct Moderator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -13,55 +16,82 @@
 </head>
 
 <body>
-    <div id="proposal">
-        <p>Vorschläge einholen</p>
-        <input type="text" id="proposal_text">
-        <button type="button" id="proposal_open">Starten</button>
-        <button type="button" id="proposal_close">Runde schließen</button>
+    <div id="tabs">
+        <div class="tab" id="tab_stats">
+            <i class="material-icons">show_chart</i>
+            <p>Statistik</p>
+        </div>
+        <div class="tab selected" id="tab_controls">
+            <i class="material-icons">question_answer</i>
+            <p>Steuerung</p>
+        </div>
+        <div class="tab" id="tab_mod">
+            <i class="material-icons">rule</i>
+            <p>Moderation</p>
+        </div>
     </div>
+    <div id="content">
 
-    <div id="stats">
-        <table id="stats_table">
-            <tr>
-                <th>Zuschauer</th>
-                <td id="view_current">?</th>
-            </tr>
-            <tr>
-                <th>Zuschauer (peak)</th>
-                <td id="view_peak">0</th>
-            </tr>
-            <tr>
-                <th>Lachen</td>
-                <td id="laugh_count">0</td>
-            </tr>
-            <tr>
-                <th>Klatschen</td>
-                <td id="clap_count">0</td>
-            </tr>
-            <tr>
-                <th>Wow</td>
-                <td id="wow_count">0</td>
-            </tr>
-            <tr>
-                <th>Zwinker</td>
-                <td id="eggplant_count">0</td>
-            </tr>
-            <tr>
-                <th>Denken</td>
-                <td id="think_count">0</td>
-            </tr>
-            <tr>
-                <th>Herz</td>
-                <td id="heart_count">0</td>
-            </tr>
-        </table>
-        <div id="stats_chart_container">
-            <canvas id="stats_chart"></canvas>
+        <div id="stats">
+            <table id="stats_table">
+                <tr>
+                    <th>Zuschauer</th>
+                    <td id="view_current">?</th>
+                </tr>
+                <tr>
+                    <th>Zuschauer (peak)</th>
+                    <td id="view_peak">0</th>
+                </tr>
+                <tr>
+                    <th>Lachen</td>
+                    <td id="laugh_count">0</td>
+                </tr>
+                <tr>
+                    <th>Klatschen</td>
+                    <td id="clap_count">0</td>
+                </tr>
+                <tr>
+                    <th>Wow</td>
+                    <td id="wow_count">0</td>
+                </tr>
+                <tr>
+                    <th>Zwinker</td>
+                    <td id="eggplant_count">0</td>
+                </tr>
+                <tr>
+                    <th>Denken</td>
+                    <td id="think_count">0</td>
+                </tr>
+                <tr>
+                    <th>Herz</td>
+                    <td id="heart_count">0</td>
+                </tr>
+            </table>
+            <div id="stats_chart_container">
+                <canvas id="stats_chart"></canvas>
+            </div>
+            <div id="stats_history_container">
+                <canvas id="stats_history"></canvas>
+            </div>
+            <button type="button" id="reset_stats">Statistik zurücksetzen</button>
         </div>
-        <div id="stats_history_container">
-            <canvas id="stats_history"></canvas>
+
+        <div id="controls">
+            <div id="proposal">
+                <p>Vorschläge einholen</p>
+                <input type="text" id="proposal_text">
+                <div class="button_row">
+                    <button type="button" id="proposal_open">Starten</button>
+                    <button type="button" id="proposal_close">Runde schließen</button>
+                </div>
+
+            </div>
         </div>
-        <button type="button" id="reset_stats">Statistik zurücksetzen</button>
+
+        <div id="mod">
+            <p>Coming soon</p>
+        </div>
+
     </div>
 </body>
 

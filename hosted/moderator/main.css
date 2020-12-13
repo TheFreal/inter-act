@@ -1,3 +1,68 @@
+body{
+    background-color: rgb(40, 40, 40);
+    margin: 0px;
+    padding: 0px;
+}
+
+#tabs{
+    display: flex;
+    width: 100%;
+    height: 75px;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 999;
+    background-color: rgb(40, 40, 40);
+}
+
+.tab{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 150ms;
+}
+
+.tab:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.tab:active{
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.tab.selected{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+p{
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tab p{
+    text-align: center;
+    font-weight: 500;
+    font-size: large;
+    pointer-events: none; 
+}
+
+.tab i{
+    color: #fff;
+    margin-right: 10px;
+}
+
+#content{
+    padding: 20px;
+    padding-top: 95px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #stats{
     display: flex;
     flex-direction: column;
@@ -5,16 +70,61 @@
     width: 50%;
     align-items: stretch;
 }
+#stats_table{
+    margin-bottom: 40px;
+}
 #stats_chart{
+    margin-bottom: 40px;
     height: 100%;
 }
 #stats_history{
     height: 100%;
 }
 th{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     text-align: start;
+    color: #fff;
 }
 td{
+    font-family: 'Montserrat', sans-serif;
     width: 20px;
     text-align: end;
+    color: #fff;
+}
+
+#controls{
+    width: 50%;
+}
+
+#proposal{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    background-color: rgb(60, 60, 60);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#proposal input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#proposal p{
+    margin-top: 5px;
+}
+
+.button_row{
+    display: flex;
+}
+
+.button_row * {
+    margin-left: 10px;
+}
+
+.button_row:first-child{
+    margin-left: 0px;
 }

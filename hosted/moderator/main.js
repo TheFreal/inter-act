@@ -50,6 +50,33 @@ function reset() {
 
 $(() => {
 
+    $("#stats").hide()
+    $("#controls").show()
+    $("#mod").hide()
+
+    //navigation logic
+    $(".tab").on("click", (event) => {
+        $(".tab").removeClass("selected");
+        $(event.target).addClass("selected");
+        switch (event.target.id) {
+            case "tab_stats":
+                $("#stats").show()
+                $("#controls").hide()
+                $("#mod").hide()
+                break;
+            case "tab_controls":
+                $("#stats").hide()
+                $("#controls").show()
+                $("#mod").hide()
+                break;
+            case "tab_mod":
+                $("#stats").hide()
+                $("#controls").hide()
+                $("#mod").show()
+                break;
+        }
+    })
+
     //setup bar chart
     const chartCanvas = $("#stats_chart")[0];
     chart = new Chart(chartCanvas, {
