@@ -41,6 +41,18 @@ $(() => {
         socket.emit("react", "think");
     })
 
+    $("#react_yes").on("click", () => {
+        socket.emit("react", "yes");
+    })
+
+    $("#react_shrug").on("click", () => {
+        socket.emit("react", "shrug");
+    })
+
+    $("#react_no").on("click", () => {
+        socket.emit("react", "no");
+    })
+
     $("#proposal_submit").on("click", () => {
         socket.emit("receive_proposal", $("#proposal_text").val());
         $("#proposal_text").val("");

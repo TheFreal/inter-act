@@ -82,7 +82,7 @@ $(() => {
     chart = new Chart(chartCanvas, {
         type: 'bar',
         data: {
-            labels: ['😂', '👏', '😮', '😏', '🤔', '❤'],
+            labels: ['😂', '👏', '😮', '😏', '🤔', '❤', "👍", "🤷‍♀️", "👎"],
             datasets: [{
                 label: 'Reactions',
                 data: [0, 0, 0, 0, 0, 0],

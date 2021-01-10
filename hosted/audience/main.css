@@ -60,11 +60,11 @@ p{
     border-top-right-radius: 20px;
 }
 
-.react:nth-of-type(6){
+.react:nth-of-type(9){
     border-bottom-right-radius: 20px;
 }
 
-.react:nth-of-type(4){
+.react:nth-of-type(7){
     border-bottom-left-radius: 20px;
 }
 

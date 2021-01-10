@@ -3,6 +3,7 @@ var socket = io();
 let canvasWidth;
 let canvasHeight;
 let particleConfig;
+let player;
 const emojiPerReact = 1;
 
 socket.on('connect', () => {
@@ -26,6 +27,17 @@ socket.on('react', (data) => {
         previousReacts.fill(0);
         setTimeout(() => { $("#background").addClass("shake") }, 1000);
         setTimeout(() => { $("#background").removeClass("shake") }, 11000);
+    }
+
+
+    // audio logic
+    if (previousReacts.filter((v) => (v == "clap")).length == 5 && player.paused) {
+        player.src = "/res/sound/golfclap.mp3";
+        player.play();
+    }
+    if (previousReacts.filter((v) => (v == "clap")).length == 15 && player.paused) {
+        player.src = "/res/sound/applause.mp3";
+        player.play();
     }
 
     switch (data) {
@@ -57,6 +69,21 @@ socket.on('react', (data) => {
         case "heart":
             for (let i = 0; i < emojiPerReact; i++) {
                 $("#background").particles("add", { amount: 100, image: "/res/img/heart.png" });
+            }
+            break;
+        case "no":
+            for (let i = 0; i < emojiPerReact; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/no.png" });
+            }
+            break;
+        case "shrug":
+            for (let i = 0; i < emojiPerReact; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/shrug.png" });
+            }
+            break;
+        case "yes":
+            for (let i = 0; i < emojiPerReact; i++) {
+                $("#background").particles("add", { amount: 100, image: "/res/img/yes.png" });
             }
             break;
     }
@@ -112,4 +139,8 @@ $(() => {
         },
     }
     $("#background").particles(particleConfig);
+    player = $("#audiotag")[0];
+    $("#soundon").click(() => {
+        $("#soundon").fadeOut();
+    })
 });
