@@ -45,8 +45,8 @@ $(() => {
         socket.emit("react", "yes");
     })
 
-    $("#react_shrug").on("click", () => {
-        socket.emit("react", "shrug");
+    $("#react_sad").on("click", () => {
+        socket.emit("react", "sad");
     })
 
     $("#react_no").on("click", () => {

@@ -76,9 +76,9 @@ socket.on('react', (data) => {
                 $("#background").particles("add", { amount: 100, image: "/res/img/no.png" });
             }
             break;
-        case "shrug":
+        case "sad":
             for (let i = 0; i < emojiPerReact; i++) {
-                $("#background").particles("add", { amount: 100, image: "/res/img/shrug.png" });
+                $("#background").particles("add", { amount: 100, image: "/res/img/sad.png" });
             }
             break;
         case "yes":
