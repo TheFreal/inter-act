@@ -54,6 +54,9 @@ io.on('connection', function (client) {
     bigscreenId.forEach(id => {
       io.to(id).emit("receive_proposal", data)
     });
+    moderatorId.forEach(id => {
+      io.to(id).emit("receive_proposal", data)
+    });
   });
 
 });

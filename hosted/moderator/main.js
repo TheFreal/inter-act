@@ -1,6 +1,6 @@
 var socket = io();
 
-let myId, chart, history;
+let myId, chart, history, propchart;
 
 let stats = {
     "laugh": 0,
@@ -8,8 +8,14 @@ let stats = {
     "wow": 0,
     "eggplant": 0,
     "think": 0,
-    "heart": 0
+    "heart": 0,
+    "no": 0,
+    "sad": 0,
+    "yes": 0,
+    "proposals": 0
 }
+
+let prop_lengths = [];
 
 socket.on("connect", (data) => {
     socket.emit("identify", { "device": "moderator" }, (id) => {
@@ -40,11 +46,46 @@ socket.on('react', (data) => {
     history.update();
 });
 
+const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
+
+// handle proposals
+socket.on('receive_proposal', (data) => {
+    let proplength = data.length;
+    stats.proposals++;
+    $("#proposal_count").text(stats.proposals);
+    prop_lengths.push(proplength)
+    let average_length = average(prop_lengths);
+    $("#proposal_avg").text(Math.round(average_length * 100) / 100);
+    // now for the chart...
+    let old = propchart.data.datasets[0].data;
+    console.log("current dataset has " + old.length + " values, new value is " + proplength);
+    if (proplength < old.length) {
+        console.log("adding to existing array")
+        // length already has a bar, nice and easy
+        propchart.data.datasets[0].data[proplength]++;
+
+    } else {
+        console.log("making a new array")
+        // we need to add more zeroes, up until proplength
+        console.log("old: " + old);
+        console.log("we need to add " + (proplength - old.length) + " zeroes")
+        let fill = new Array(proplength - old.length).fill(0);
+        console.log("fill: " + fill);
+        let newarr = old.concat(fill);
+        // then push that final, highest value
+        newarr.push(1);
+        console.log("new: " + newarr);
+        propchart.data.labels = Array.from(Array(newarr.length).keys())
+        propchart.data.datasets[0].data = newarr;
+    }
+    propchart.update();
+})
+
 function reset() {
     $("#view_peak").text(currentCount);
     Object.keys(stats).forEach(k => stats[k] = 0);
     $("[id$=count]").text("0");
-    chart.data.datasets[0].data = [0, 0, 0, 0, 0, 0]
+    chart.data.datasets[0].data = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     chart.update()
 }
 
@@ -82,17 +123,20 @@ $(() => {
     chart = new Chart(chartCanvas, {
         type: 'bar',
         data: {
-            labels: ['😂', '👏', '😮', '😏', '🤔', '❤', "👍", "🤷‍♀️", "👎"],
+            labels: ['😂', '👏', '😮', '😏', '🤔', '❤', "👍", "😥", "👎"],
             datasets: [{
                 label: 'Reactions',
-                data: [0, 0, 0, 0, 0, 0],
+                data: [0, 0, 0, 0, 0, 0, 0, 0],
                 backgroundColor: [
-                    'rgba(255, 99, 132, .6)',
-                    'rgba(54, 162, 235, .6)',
-                    'rgba(255, 206, 86, .6)',
-                    'rgba(75, 192, 192, .6)',
-                    'rgba(153, 102, 255, .6)',
-                    'rgba(255, 159, 64, .6)'
+                    '#f44336',
+                    '#9c27b0',
+                    '#3f51b5',
+                    '#2196f3',
+                    '#00bcd4',
+                    '#4caf50',
+                    '#cddc39',
+                    '#ffc107',
+                    '#795548',
                 ],
             }]
         },
@@ -122,7 +166,7 @@ $(() => {
                     showLine: true,
                     pointRadius: 0,
                     fill: false,
-                    borderColor: 'rgba(255, 99, 132, .6)'
+                    borderColor: '#f44336'
                 },
                 {
                     label: 'Klatschen',
@@ -130,7 +174,7 @@ $(() => {
                     pointRadius: 0,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(54, 162, 235, .6)'
+                    borderColor: '#9c27b0'
                 },
                 {
                     label: 'Wow',
@@ -138,7 +182,7 @@ $(() => {
                     pointRadius: 0,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(255, 206, 86, .6)'
+                    borderColor: '#3f51b5'
                 },
                 {
                     label: 'Zwinker',
@@ -146,7 +190,7 @@ $(() => {
                     pointRadius: 0,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(75, 192, 192, .6)'
+                    borderColor: '#2196f3'
                 },
                 {
                     label: 'Denken',
@@ -154,7 +198,7 @@ $(() => {
                     pointRadius: 0,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(153, 102, 255, .6)'
+                    borderColor: '#00bcd4'
                 },
                 {
                     label: 'Herz',
@@ -162,7 +206,29 @@ $(() => {
                     pointRadius: 0,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(255, 159, 64, .6)'
+                    borderColor: '#4caf50'
+                },
+                {
+                    label: 'Nein',
+                    data: [],
+                    pointRadius: 0,
+                    showLine: true,
+                    fill: false,
+                    borderColor: '#cddc39'
+                }, {
+                    label: 'Traurig',
+                    data: [],
+                    pointRadius: 0,
+                    showLine: true,
+                    fill: false,
+                    borderColor: '#ffc107'
+                }, {
+                    label: 'Ja',
+                    data: [],
+                    pointRadius: 0,
+                    showLine: true,
+                    fill: false,
+                    borderColor: '#795548'
                 }
             ]
         },
@@ -198,6 +264,31 @@ $(() => {
                     display: false
                 }]
             },
+        }
+    });
+
+    //setup bar chart
+    const propChartCanvas = $("#stats_proposals")[0];
+    propchart = new Chart(propChartCanvas, {
+        type: 'bar',
+        data: {
+            datasets: [{
+                backgroundColor: "#795548",
+                label: 'Proposal length',
+                data: [0],
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
     });
 

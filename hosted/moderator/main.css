@@ -79,6 +79,11 @@ p{
 }
 #stats_history{
     height: 100%;
+    margin-bottom: 40px;
+}
+#stats_proposals{
+    height: 100%;
+    margin-bottom: 40px;
 }
 th{
     font-family: 'Montserrat', sans-serif;
