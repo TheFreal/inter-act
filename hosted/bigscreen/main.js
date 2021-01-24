@@ -90,14 +90,15 @@ socket.on('react', (data) => {
 });
 
 socket.on("receive_proposal", (data) => {
-    $("#proposal_text").fadeOut(0, () => {
-        $("#proposal_text").text(data);
-        $("#proposal_text").fadeIn();
-        setTimeout(() => {
-            $("#proposal_text").fadeOut();
-        }, 3000);
-
-    });
+    let id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    $("#proposal_list").append("<p id='" + id + "' class='proposal_text'>" + data + "</p>");
+    $("#" + id).hide();
+    $("#" + id).slideDown();
+    setTimeout(() => {
+        $("#" + id).slideUp(400, () => {
+            $("#" + id).remove();
+        });
+    }, 4000)
 });
 
 $(() => {

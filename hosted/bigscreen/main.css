@@ -38,11 +38,26 @@ body{
 	height: 100vh;
 }
 
-#proposal_text{
+#proposal_list{
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 60%;
+	align-self: flex-end;
+}
+
+.proposal_text{
 	color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    font-size: 100pt;
+	font-size: 4vw;
+	word-break: break-all;
+	text-align: center;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
 }
 
 @-webkit-keyframes spaceboots {
