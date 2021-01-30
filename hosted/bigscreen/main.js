@@ -6,19 +6,33 @@ let particleConfig;
 let player;
 const emojiPerReact = 1;
 
+// thanks stackoverflow, and thanks to the user who found the exploit INSTANTLY!
+function sanitize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match) => (map[match]));
+}
+
 socket.on('connect', () => {
     socket.emit("identify", { "device": "bigscreen" });
 })
 
 socket.on('viewcount', (data) => {
-    $("#viewcount").text(data + " Zuschauer");
+    $("#viewcount").text(sanitize(data) + " Zuschauer");
 });
 
 let previousReacts = new Array(30).fill(0)
 
 socket.on('react', (data) => {
-    console.log(data);
-
+    data = sanitize(data)
+    console.log(data);;
     // buffer previous reacts
     previousReacts.push(data);
     previousReacts.shift();
@@ -95,7 +109,7 @@ socket.on('react', (data) => {
 
 socket.on("receive_proposal", (data) => {
     let id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    $("#proposal_list").append("<p id='" + id + "' class='proposal_text'>" + data + "</p>");
+    $("#proposal_list").append("<p id='" + id + "' class='proposal_text'>" + sanitize(data) + "</p>");
     $("#" + id).hide();
     $("#" + id).slideDown();
     setTimeout(() => {
