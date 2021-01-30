@@ -53,7 +53,8 @@ $(() => {
         socket.emit("react", "no");
     })
 
-    $("#proposal_submit").on("click", () => {
+    $("#proposal_form").submit((e) => {
+        e.preventDefault();
         socket.emit("receive_proposal", $("#proposal_text").val());
         $("#proposal_text").val("");
     })

@@ -10,10 +10,11 @@ body{
 }
 
 #proposal{
+    text-align: center;
     width: 270px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     margin-bottom: 50px;
     background-color: rgb(60, 60, 60);
     padding: 30px;
@@ -21,8 +22,32 @@ body{
 }
 
 #proposal input{
-    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#proposal_text{
     margin-bottom: 20px;
+    border-width: 0px;
+}
+
+#proposal_submit{
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: small;
+    transition: 100ms;
+}
+
+#proposal_submit:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#proposal_submit:active{
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 p{

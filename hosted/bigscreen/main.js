@@ -14,7 +14,7 @@ socket.on('viewcount', (data) => {
     $("#viewcount").text(data + " Zuschauer");
 });
 
-let previousReacts = new Array(20).fill(0)
+let previousReacts = new Array(30).fill(0)
 
 socket.on('react', (data) => {
     console.log(data);
@@ -23,10 +23,14 @@ socket.on('react', (data) => {
     previousReacts.push(data);
     previousReacts.shift();
     if (previousReacts.every(v => v === data)) {
-        console.log("that'S a lot of " + data + "!");
+        console.log("that's a lot of " + data + "!");
         previousReacts.fill(0);
+        $("#bigemoji").css("background-image", "url('/res/img/" + data + ".png')")
+        $("#bigemoji").fadeIn(2000, () => {
+            $("#bigemoji").fadeOut(2000);
+        });
         setTimeout(() => { $("#background").addClass("shake") }, 1000);
-        setTimeout(() => { $("#background").removeClass("shake") }, 11000);
+        setTimeout(() => { $("#background").removeClass("shake") }, 4000);
     }
 
 
@@ -53,7 +57,7 @@ socket.on('react', (data) => {
             break;
         case "clap":
             for (let i = 0; i < emojiPerReact; i++) {
-                $("#background").particles("add", { amount: 100, image: "/res/img/applause.png" });
+                $("#background").particles("add", { amount: 100, image: "/res/img/clap.png" });
             }
             break;
         case "wow":
@@ -110,10 +114,10 @@ $(() => {
         duration: {
             duration: 10000,// 1000 == 1s default 10s
             random: false,// random between duration.duration and duration.min
-            min: 5000,// minimum duration default 1s
+            min: 4000,// minimum duration default 1s
         },
         speed: { speed: 1.6 },
-        radius: { radius: 40, random: true, min: 10 },
+        radius: { radius: 30, random: true, min: 5 },
         dir: {
             x: 1,
             y: -1,
@@ -130,16 +134,17 @@ $(() => {
         layout: "after",
         color: { color: { r: 255, g: 255, b: 255 }, random: false },
         bound: "hide",
-        position: { x: (canvasWidth / 2), y: canvasHeight / 10 },
+        position: { x: (canvasWidth / 2), y: canvasHeight + 30 },
         opacity: {
             opacity: 0.7, // default opacity 1 if opacity.animation or opacity.random it is max opacity
             random: false,// random between opacity.opacity and opacity.min
             min: 0, // minimum opacity default 
-            animation: true,
-            decay: true  // if true opacity decreases until min opacity
+            animation: false,
+            decay: false  // if true opacity decreases until min opacity
         },
     }
     $("#background").particles(particleConfig);
+    $("#bigemoji").hide();
     player = $("#audiotag")[0];
     $("#soundon").click(() => {
         $("#soundon").fadeOut();

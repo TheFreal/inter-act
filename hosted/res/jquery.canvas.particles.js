@@ -291,12 +291,20 @@
 			}
 			else if (o.bound == "hide") {
 				// TODO if I feel like it, might as well do this properly
-				o.position.x = o.position.x > data.canvas.width + o.radius.radius + 2 ? -o.radius.radius : (o.position.x < -(o.radius.radius + 2)) ? data.canvas.width + o.radius.radius : o.position.x;
+				if (o.position.x + o.radius.radius >= data.canvas.width) {
+					o.position.x += -o.speed.speed;
+					o.dir.x = -1;
+				}
+				else if (o.position.x <= o.radius.radius) {
+					o.position.x += o.speed.speed;
+					o.dir.x = 1;
+				}
 				if (!o.image) {
 					o.position.y = o.position.y > data.canvas.height + o.radius.radius + 2 ? -o.radius.radius : (o.position.y < -(o.radius.radius + 2)) ? data.canvas.height + o.radius.radius : o.position.y;
 				}
 				else {
-					o.position.y = o.position.y > data.canvas.height + o.radius.radius * o.image.height / o.image.width + 2 ? -o.radius.radius * o.image.height / o.image.width : (o.position.y < -(o.radius.radius * o.image.height / o.image.width + 2)) ? data.canvas.height + o.radius.radius * o.image.height / o.image.width : o.position.y;
+					o.position.y = o.position.y > data.canvas.height + o.radius.radius * o.image.height / o.image.width + 2
+						? 0 : o.position.y;
 				}
 			}
 			else if (o.bound == "bounce") {
